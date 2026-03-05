@@ -1,0 +1,26 @@
+# Jupyter & Data Science
+jupyterlab
+numpy
+pandas
+matplotlib
+seaborn
+scikit-learn
+pillow
+opencv-python
+tqdm
+scikit-image
+plotly
+
+# PyTorch CPU version
+torch
+torchvision
+torchaudio
+
+# YOLOv8
+ultralytics
+
+# FastAPI & JWT
+fastapi
+uvicorn
+python-jose[cryptography]
+passlib[bcrypt]
