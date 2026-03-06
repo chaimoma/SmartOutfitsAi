@@ -15,12 +15,12 @@ plotly
 torch
 torchvision
 torchaudio
-
-# YOLOv8
-ultralytics
-
 # FastAPI & JWT
 fastapi
 uvicorn
 python-jose[cryptography]
 passlib[bcrypt]
+sqlalchemy
+psycopg2-binary
+passlib
+bcrypt
