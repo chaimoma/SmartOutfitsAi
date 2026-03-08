@@ -1,3 +1,4 @@
 data/
 filvenv/
 backend/app/.env
+__pycache__/
