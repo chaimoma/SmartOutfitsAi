@@ -26,4 +26,4 @@ passlib
 bcrypt
 python-dotenv
 psycopg2
-google-generativeai
+python-multipart
