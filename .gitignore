@@ -2,3 +2,6 @@ data/
 filvenv/
 backend/app/.env
 __pycache__/
+backend/app/__pycache__/
+backend/app/uploads/
+.pytest_cache/
