@@ -6,6 +6,7 @@ import requests
 import os
 import io
 import ast
+from .rag import store_recommendation, search_similar_recommendation
 
 #paths
 BASE_DIR   = Path(__file__).resolve().parents[2]
@@ -27,6 +28,13 @@ def get_outfit_recommendation(detected_labels: list) -> list:
     """ask Groq for a complete outfit suggestion."""
     if not detected_labels:
         return []
+
+    # check RAG first
+    cached = search_similar_recommendation(detected_labels)
+    if cached:
+        print("RAG hit! Returning cached recommendation.")
+        return cached
+
     items  = ", ".join(detected_labels)
     prompt = f"""
     A user is wearing: {items}.
@@ -70,13 +78,16 @@ def get_recommendations_with_images(image_bytes: bytes, wardrobe_labels: dict = 
     if not detected:
         return {"detected": [], "from_wardrobe": [], "from_internet": []}
 
-    # step 2: get complete outfit suggestions from Groq
+    # step 2: get complete outfit suggestions (RAG first, then Groq)
     suggestions = get_outfit_recommendation(detected)
+
+    # step 3: store recommendation in RAG for future use
+    store_recommendation(hash(str(detected)), detected, suggestions)
 
     from_wardrobe = []
     from_internet = []
 
-    # step 3: for each suggestion, check wardrobe first
+    # step 4: for each suggestion, check wardrobe first
     for item in suggestions:
         matched = None
         for label, wardrobe_item in wardrobe_labels.items():
