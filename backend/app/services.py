@@ -6,7 +6,9 @@ import requests
 import os
 import io
 import ast
-from .rag import store_recommendation, search_similar_recommendation
+import time
+from rag import store_recommendation, search_similar_recommendation
+from MLops.tracking import log_recommendation
 
 #paths
 BASE_DIR   = Path(__file__).resolve().parents[2]
@@ -79,10 +81,14 @@ def get_recommendations_with_images(image_bytes: bytes, wardrobe_labels: dict = 
         return {"detected": [], "from_wardrobe": [], "from_internet": []}
 
     # step 2: get complete outfit suggestions (RAG first, then Groq)
+    start    = time.time()
+    from_rag = search_similar_recommendation(detected) is not None
     suggestions = get_outfit_recommendation(detected)
+    response_time = (time.time() - start) * 1000
 
-    # step 3: store recommendation in RAG for future use
+    # step 3: store recommendation in RAG and log to MLflow
     store_recommendation(hash(str(detected)), detected, suggestions)
+    log_recommendation(detected, suggestions, from_rag, response_time)
 
     from_wardrobe = []
     from_internet = []
