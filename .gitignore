@@ -7,3 +7,4 @@ backend/uploads/
 .pytest_cache/
 chroma_db/
 mlruns/
+mlflow.db
