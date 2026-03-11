@@ -28,7 +28,20 @@ app.add_middleware(
 )
 
 DbDep = Depends(get_db)
-
+CATEGORY_MAP = {
+    "long sleeve top":      "TOPS",
+    "short sleeve top":     "TOPS",
+    "vest":                 "TOPS",
+    "sling":                "TOPS",
+    "skirt":                "BOTTOMS",
+    "trousers":             "BOTTOMS",
+    "shorts":               "BOTTOMS",
+    "long sleeve dress":    "BOTTOMS",
+    "short sleeve dress":   "BOTTOMS",
+    "sling dress":          "BOTTOMS",
+    "long sleeve outwear":  "OUTERWEAR",
+    "short sleeve outwear": "OUTERWEAR",
+}
 #auth
 @app.post("/register")
 def register(user: UserCreate, db: Session = DbDep):
@@ -39,6 +52,7 @@ def register(user: UserCreate, db: Session = DbDep):
     db.add(new_user)
     db.commit()
     return {"message": "registered"}
+
 @app.post("/login")
 def login(user: UserLogin, db: Session = DbDep):
     db_user = db.query(User).filter(User.email == user.email).first()
@@ -85,10 +99,11 @@ def get_wardrobe(token=Depends(verify_token), db: Session = DbDep):
     items   = db.query(Wardrobe).filter(Wardrobe.user_id == user_id).all()
     return [
         {
-            "id":            item.id,
+            "id":             item.id,
             "detected_label": item.detected_label,
-            "image_url":     f"http://127.0.0.1:8001{item.image_path}",
-            "created_at":    item.created_at
+            "category":       CATEGORY_MAP.get(item.detected_label, "TOPS"),
+            "image_url":      f"http://127.0.0.1:8001{item.image_path}",
+            "created_at":     item.created_at
         }
         for item in items
     ]
