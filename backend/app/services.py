@@ -8,6 +8,8 @@ import io
 import ast
 import time
 from rag import store_recommendation, search_similar_recommendation
+import sys
+sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 from MLops.tracking import log_recommendation
 
 #paths
