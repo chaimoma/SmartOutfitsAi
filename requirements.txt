@@ -38,3 +38,5 @@ sentence-transformers
 #testing
 pytest
 httpx
+
+mlflow
