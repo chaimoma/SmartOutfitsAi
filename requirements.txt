@@ -1,4 +1,4 @@
-# Jupyter & Data Science
+#dataScience & Jupyter
 jupyterlab
 numpy
 pandas
@@ -6,24 +6,35 @@ matplotlib
 seaborn
 scikit-learn
 pillow
-opencv-python
+opencv-python-headless
 tqdm
 scikit-image
 plotly
-
-# PyTorch CPU version
+#pyTorch
 torch
 torchvision
 torchaudio
-# FastAPI & JWT
+# ML / YOLO
+ultralytics
+#fastAPI & backend
 fastapi
 uvicorn
 python-jose[cryptography]
-passlib[bcrypt]
+passlib==1.7.4
+bcrypt==4.0.1
 sqlalchemy
 psycopg2-binary
-passlib
-bcrypt
 python-dotenv
-psycopg2
 python-multipart
+aiofiles
+#ai & LLM
+groq
+google-genai
+#image search
+requests
+# RAG
+chromadb
+sentence-transformers
+#testing
+pytest
+httpx
