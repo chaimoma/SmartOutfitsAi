@@ -7,6 +7,7 @@ from typing import Optional
 class UserCreate(BaseModel):
     email: str
     password: str
+    gender: Optional[str] = "man"
 
 class UserLogin(BaseModel):
     email: str
