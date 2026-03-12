@@ -8,3 +8,6 @@ backend/uploads/
 chroma_db/
 mlruns/
 mlflow.db
+node_modules/
+.next/
+.pnpm-workspace-state-v1.json
