@@ -1,0 +1,44 @@
+version: "3.9"
+
+services:
+  db:
+    image: postgres:15
+    container_name: smart_outfits_db
+    env_file:
+      - ./backend/app/.env
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  backend:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    container_name: smart_outfits_backend
+    ports:
+      - "8001:8001"
+    env_file:
+      - ./backend/app/.env
+    volumes:
+      - ./backend:/app
+      - ./ml:/ml
+      - ./MLops:/app/MLops
+    depends_on:
+      - db
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: smart_outfits_frontend
+    ports:
+      - "3001:3000"
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    depends_on:
+      - backend
+
+volumes:
+  postgres_data:
