@@ -1,22 +1,23 @@
-#dataScience & Jupyter
-jupyterlab
+--extra-index-url https://download.pytorch.org/whl/cpu
+
+# data science & jupyter 
+# jupyterlab
+# pandas
+# matplotlib
+# seaborn
+# scikit-learn
+# tqdm
+# scikit-image
+# plotly
 numpy
-pandas
-matplotlib
-seaborn
-scikit-learn
 pillow
 opencv-python-headless
-tqdm
-scikit-image
-plotly
-#pyTorch
+# pytorch cpu only
 torch
 torchvision
-torchaudio
-# ML / YOLO
+# ml / yolo
 ultralytics
-#fastAPI & backend
+# fastapi & backend
 fastapi
 uvicorn
 python-jose[cryptography]
@@ -27,16 +28,15 @@ psycopg2-binary
 python-dotenv
 python-multipart
 aiofiles
-#ai & LLM
+# ai & llm
 groq
-google-genai
-#image search
+# image search
 requests
-# RAG
+# rag
 chromadb
 sentence-transformers
-#testing
+# testing
 pytest
 httpx
-
+# mlops
 mlflow
