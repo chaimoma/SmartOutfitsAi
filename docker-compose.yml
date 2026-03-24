@@ -24,6 +24,7 @@ services:
       - ./backend:/app
       - ./ml:/ml
       - ./MLops:/app/MLops
+      - ./mlruns:/app/mlruns
     depends_on:
       - db
 
